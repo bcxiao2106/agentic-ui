@@ -1,0 +1,1 @@
+export const ok=(_req,res)=>res.json({status:'ok'});
