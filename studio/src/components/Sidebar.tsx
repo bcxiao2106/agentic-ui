@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { SquarePlus, LayoutDashboard, Puzzle, Zap } from 'lucide-react';
+import { SquarePlus, LayoutDashboard, Puzzle, Zap, Grape } from 'lucide-react';
 import clsx from 'clsx';
 
 interface SidebarProps {
@@ -22,8 +22,8 @@ export default function Sidebar({ onSelectComponent }: SidebarProps) {
       {/* Header */}
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-            <Zap size={18} className="text-white" />
+          <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <Grape size={18} className="text-white" />
           </div>
           <div className="flex-1">
             <h1 className="text-sm font-bold text-gray-900">Agentic UI Studio</h1>
