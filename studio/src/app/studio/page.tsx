@@ -3,11 +3,8 @@
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import ComponentsView from '@/components/ComponentsView';
-import Toolbar from '@/components/Toolbar';
-import CodeEditor from '@/components/CodeEditor';
-import Preview from '@/components/Preview';
 
-type ViewMode = 'newWidget' | 'gallery' | 'components' | 'editor';
+type ViewMode = 'newView' | 'gallery' | 'components';
 
 export default function StudioPage() {
   const [code, setCode] = useState(`<Card
@@ -38,19 +35,18 @@ export default function StudioPage() {
   </Col>
 </Card>`);
 
-  const [selectedComponent, setSelectedComponent] = useState<ViewMode>('newWidget');
+  const [selectedComponent, setSelectedComponent] = useState<ViewMode>('newView');
 
   const renderMainContent = () => {
     switch (selectedComponent) {
-      case 'newWidget':
+      case 'newView':
         return (
-          <>
-            <Toolbar />
-            <div className="flex flex-1 overflow-hidden">
-              <CodeEditor code={code} onCodeChange={setCode} />
-              <Preview code={code} />
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Generate New View</h2>
+              <p className="text-gray-600">Generate new view panel coming soon</p>
             </div>
-          </>
+          </div>
         );
       case 'gallery':
         return (

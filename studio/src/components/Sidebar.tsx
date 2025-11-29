@@ -9,10 +9,10 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ onSelectComponent }: SidebarProps) {
-  const [activeSection, setActiveSection] = React.useState('editor');
+  const [activeSection, setActiveSection] = React.useState('newView');
 
   const sections = [
-    { id: 'newWidget', label: 'New Widget', icon: SquarePlus },
+    { id: 'newView', label: 'New View', icon: SquarePlus },
     { id: 'gallery', label: 'Gallery', icon: LayoutDashboard },
     { id: 'components', label: 'Components', icon: Puzzle },
   ];
@@ -57,7 +57,7 @@ export default function Sidebar({ onSelectComponent }: SidebarProps) {
         })}
       </nav>
 
-      {/* Footer */}
+      {/* Footer
       <div className="p-4 border-t border-gray-200 space-y-2">
         <button className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
           Save
@@ -65,7 +65,7 @@ export default function Sidebar({ onSelectComponent }: SidebarProps) {
         <button className="w-full px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">
           Export
         </button>
-      </div>
+      </div> */}
     </aside>
   );
 }

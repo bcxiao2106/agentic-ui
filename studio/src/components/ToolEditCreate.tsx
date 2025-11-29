@@ -47,8 +47,8 @@ const defaultFormData: ComponentFormData = {
   category: "widgetManager",
   is_active: true,
   version: {
-    version_number: "1.0.0",
-    semantic_version: "1.0.0",
+    version_number: "0.0.1",
+    semantic_version: "0.0.1",
     input_schema: {},
     output_schema: {},
     handler_language: "javascript",
