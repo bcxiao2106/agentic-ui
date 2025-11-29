@@ -1,0 +1,40 @@
+{
+  "name": "agentic-ui-studio-server",
+  "version": "1.0.0",
+  "description": "Studio server for Agentic UI - combines Node.js/Express, PostgreSQL, MCP Server, and serves frontend",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "db:init": "tsx src/database/init.ts",
+    "db:seed": "tsx src/database/seed.ts",
+    "db:migrate": "tsx src/database/migrate.ts",
+    "lint": "eslint src --ext .ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.3",
+    "react-monaco-editor": "^0.59.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.6",
+    "@types/pg": "^8.10.9",
+    "@types/react-monaco-editor": "^0.16.0",
+    "@types/uuid": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

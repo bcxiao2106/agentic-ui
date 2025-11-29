@@ -2,9 +2,12 @@
 
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
+import ComponentsView from '@/components/ComponentsView';
 import Toolbar from '@/components/Toolbar';
 import CodeEditor from '@/components/CodeEditor';
 import Preview from '@/components/Preview';
+
+type ViewMode = 'newWidget' | 'gallery' | 'components' | 'editor';
 
 export default function StudioPage() {
   const [code, setCode] = useState(`<Card
@@ -35,23 +38,46 @@ export default function StudioPage() {
   </Col>
 </Card>`);
 
-  const [selectedComponent, setSelectedComponent] = useState(null);
+  const [selectedComponent, setSelectedComponent] = useState<ViewMode>('newWidget');
+
+  const renderMainContent = () => {
+    switch (selectedComponent) {
+      case 'newWidget':
+        return (
+          <>
+            <Toolbar />
+            <div className="flex flex-1 overflow-hidden">
+              <CodeEditor code={code} onCodeChange={setCode} />
+              <Preview code={code} />
+            </div>
+          </>
+        );
+      case 'gallery':
+        return (
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Gallery</h2>
+              <p className="text-gray-600">Gallery panel coming soon</p>
+            </div>
+          </div>
+        );
+      case 'components':
+        return <ComponentsView />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="flex h-screen bg-gray-50">
-      {/* Sidebar */}
-      <Sidebar onSelectComponent={setSelectedComponent} />
+      {/* Left Sidebar */}
+      <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
+        <Sidebar onSelectComponent={(component) => setSelectedComponent(component as ViewMode)} />
+      </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Toolbar */}
-        <Toolbar />
-
-        {/* Editor and Preview */}
-        <div className="flex flex-1 overflow-hidden">
-          <CodeEditor code={code} onCodeChange={setCode} />
-          <Preview code={code} />
-        </div>
+      {/* Right Content Container */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {renderMainContent()}
       </div>
     </div>
   );

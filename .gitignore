@@ -62,5 +62,5 @@ Thumbs.db
 # TypeScript
 *.tsbuildinfo
 
-# Ignore Next.js build output
-.next/
+# Ignore Next.js build output in all subprojects
+**/.next/

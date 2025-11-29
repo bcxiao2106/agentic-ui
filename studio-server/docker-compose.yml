@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: agentic_ui_db
+    environment:
+      POSTGRES_USER: agentic_user
+      POSTGRES_PASSWORD: postgres_password_change_me
+      POSTGRES_DB: agentic_ui
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agentic_user -d agentic_ui"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  studio-server:
+    build: .
+    container_name: agentic_ui_server
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://agentic_user:postgres_password_change_me@postgres:5432/agentic_ui
+      PORT: 3001
+      HOST: 0.0.0.0
+      LOG_LEVEL: debug
+      CORS_ORIGIN: http://localhost:3000,http://localhost:3001
+      SERVE_FRONTEND: "true"
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/api/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: agentic_ui_network
