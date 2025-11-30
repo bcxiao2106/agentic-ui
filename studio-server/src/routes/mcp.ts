@@ -1,8 +1,9 @@
 import { Router, Request, Response } from 'express';
+import type { Router as ExpressRouter } from 'express';
 import { logger } from '@/utils/logger';
 import { query, queryOne } from '@/database/connection';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 // MCP: List available tools
 router.post('/tools/list', async (req: Request, res: Response) => {

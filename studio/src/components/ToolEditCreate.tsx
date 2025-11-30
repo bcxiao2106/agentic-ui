@@ -160,40 +160,40 @@ export default function ComponentEditCreate({
   };
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto py-8 px-8">
+    <div className="space-y-4 max-w-2xl mx-auto py-4 px-4">
       {/* Header */}
-      <div className="flex items-center justify-between pb-6 border-b border-gray-200">
+      <div className="flex items-center justify-between pb-4 border-b border-gray-200">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h2 className="text-xl font-bold text-gray-900">
             {isEdit ? "Edit Component" : "Create New Component"}
-          </h1>
+          </h2>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Category and Active Status - Read Only */}
-        <div className="space-y-4">
-          <div className="border-l-4 border-gray-500 pl-4">
-            <h2 className="text-lg font-semibold text-gray-900">Settings</h2>
+        <div className="space-y-3">
+          <div className="border-l-4 border-gray-500 pl-3">
+            <h2 className="text-sm font-semibold text-gray-900">Settings</h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs font-medium text-gray-700 mb-1">
                 Category
               </label>
-              <div className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 font-medium capitalize">
+              <div className="w-full px-2 py-1 bg-gray-50 border border-gray-300 rounded-md text-gray-700 font-medium capitalize">
                 {formData.category}
               </div>
             </div>
 
-            <div className="flex items-end pb-2">
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 cursor-default">
+            <div className="flex items-end pb-1">
+              <label className="flex items-center gap-1 text-xs font-medium text-gray-700 cursor-default">
                 <input
                   type="checkbox"
                   checked={formData.is_active}
                   disabled
-                  className="w-4 h-4 rounded border-gray-300 bg-gray-50"
+                  className="w-3 h-3 rounded border-gray-300 bg-gray-50"
                 />
                 Active
               </label>
@@ -202,16 +202,16 @@ export default function ComponentEditCreate({
         </div>
 
         {/* Basic Information */}
-        <div className="space-y-4">
-          <div className="border-l-4 border-blue-500 pl-4">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="space-y-3">
+          <div className="border-l-4 border-blue-500 pl-3">
+            <h2 className="text-sm font-semibold text-gray-900">
               Basic Information
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs font-medium text-gray-700 mb-1">
                 Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -221,19 +221,16 @@ export default function ComponentEditCreate({
                   setFormData((prev) => ({ ...prev, name: e.target.value }))
                 }
                 placeholder="e.g., Weather API"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               {errors.name && (
                 <p className="text-red-500 text-xs mt-1">{errors.name}</p>
               )}
             </div>
-
-            {/* Slug - Hidden */}
-            {/* Removed the slug input field from the form UI */}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-xs font-medium text-gray-700 mb-1">
               Description <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -246,28 +243,17 @@ export default function ComponentEditCreate({
               }
               placeholder="Describe what this tool does..."
               rows={3}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             />
             {errors.description && (
               <p className="text-red-500 text-xs mt-1">{errors.description}</p>
             )}
           </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Version Number
-              </label>
-              <div className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-700 font-mono text-sm">
-                {formData.version.version_number}
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Tagging Section */}
-        <div className="space-y-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+        <div className="space-y-3">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
             Tags
           </label>
           <Tagging
@@ -285,15 +271,15 @@ export default function ComponentEditCreate({
         </div>
 
         {/* Tabs Section */}
-        <div className="space-y-4">
-          <div className="border-l-4 border-purple-500 pl-4">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="space-y-3">
+          <div className="border-l-4 border-purple-500 pl-3">
+            <h2 className="text-sm font-semibold text-gray-900">
               Handler & Schemas
             </h2>
           </div>
           {/* Handler Language Dropdown */}
-          <div className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+          <div className="space-y-3">
+            <label className="block text-xs font-medium text-gray-700 mb-1">
               Handler Language
             </label>
             <select
@@ -301,10 +287,13 @@ export default function ComponentEditCreate({
               onChange={(e) =>
                 setFormData((prev) => ({
                   ...prev,
-                  version: { ...prev.version, handler_language: e.target.value },
+                  version: {
+                    ...prev.version,
+                    handler_language: e.target.value,
+                  },
                 }))
               }
-              className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-1/2 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="javascript">JavaScript</option>
               <option value="python">Python</option>
@@ -313,7 +302,6 @@ export default function ComponentEditCreate({
               <option value="rust">Rust</option>
             </select>
           </div>
-
           <TabComponent
             handlerSourceCode={formData.version.handler_source_code}
             inputSchema={JSON.stringify(formData.version.input_schema, null, 2)}
@@ -334,18 +322,18 @@ export default function ComponentEditCreate({
         </div>
 
         {/* Form Actions */}
-        <div className="flex gap-3 justify-end border-t border-gray-200 pt-8 mt-8">
+        <div className="flex gap-2 justify-end border-t border-gray-200 pt-6 mt-6">
           <button
             type="button"
             onClick={onCancel}
-            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+            className="px-4 py-1 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors font-medium text-xs"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSaving}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium text-xs disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSaving
               ? "Saving..."

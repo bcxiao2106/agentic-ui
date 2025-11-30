@@ -1,4 +1,5 @@
 import './globals.css';
+import { QueryProvider } from '@/components/QueryProvider';
 
 export const metadata = {
   title: 'Agentic UI Studio',
@@ -15,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body suppressHydrationWarning>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }

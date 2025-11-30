@@ -73,7 +73,7 @@ const LAYOUT_UI_COMPONENTS: Component[] = [
 
 export default function ComponentsView() {
   const [selectedComponent, setSelectedComponent] = useState<string | null>('Button');
-  const [expandedCategory, setExpandedCategory] = useState<string | null>('Controls');
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null); // Default to all categories expanded
   const [selectedCategory, setSelectedCategory] = useState<string>('widgetManager');
   const [componentCategory, setComponentCategory] = useState<'widgetManager' | 'layoutUI'>('widgetManager');
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -97,36 +97,36 @@ export default function ComponentsView() {
   return (
     <div className="flex h-full overflow-hidden">
       {/* Left Sidebar - Components List */}
-      <div className="w-56 border-r border-gray-200 overflow-y-auto bg-gray-50">
-        <div className="p-4">
-          <h2 className="text-sm font-semibold text-gray-900 mb-4">Components</h2>
+      <div className="w-48 border-r border-gray-200 overflow-y-auto bg-gray-50">
+        <div className="p-3">
+          <h2 className="text-xs font-semibold text-gray-900 mb-3">Components</h2>
 
           {/* Dropdown */}
-          <div className="mb-4 relative">
+          <div className="mb-3 relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors"
+              className="w-full flex items-center justify-between px-2 py-1 border border-gray-300 rounded-md bg-white hover:bg-gray-50 transition-colors"
             >
-              <span className="text-sm text-gray-700">
+              <span className="text-xs text-gray-700">
                 {selectedCategory === 'widgetManager' ? 'Widget Manager' : 'Layout UI'}
               </span>
               <ChevronDown
-                size={16}
+                size={12}
                 className={clsx('text-gray-500 transition-transform', dropdownOpen && 'rotate-180')}
               />
             </button>
 
             {dropdownOpen && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+              <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10">
                 <button
                   onClick={() => {
                     setSelectedCategory('widgetManager');
-                    setExpandedCategory('Controls');
+                    setExpandedCategory(null);
                     setSelectedComponent('Button');
                     setDropdownOpen(false);
                   }}
                   className={clsx(
-                    'w-full text-left px-3 py-2 text-sm transition-colors hover:bg-gray-100',
+                    'w-full text-left px-2 py-1 text-xs transition-colors hover:bg-gray-100',
                     selectedCategory === 'widgetManager' && 'bg-blue-50 text-blue-700 font-medium'
                   )}
                 >
@@ -135,12 +135,12 @@ export default function ComponentsView() {
                 <button
                   onClick={() => {
                     setSelectedCategory('layoutUI');
-                    setExpandedCategory('Layout Containers');
+                    setExpandedCategory(null);
                     setSelectedComponent('Container');
                     setDropdownOpen(false);
                   }}
                   className={clsx(
-                    'w-full text-left px-3 py-2 text-sm transition-colors hover:bg-gray-100',
+                    'w-full text-left px-2 py-1 text-xs transition-colors hover:bg-gray-100',
                     selectedCategory === 'layoutUI' && 'bg-blue-50 text-blue-700 font-medium'
                   )}
                 >
@@ -153,46 +153,36 @@ export default function ComponentsView() {
           {/* Add Button */}
           <button
             onClick={() => setShowEditCreate(true)}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm mb-4"
+            className="w-full flex items-center justify-center gap-1 px-2 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium text-xs mb-3"
           >
-            <Plus size={16} />
-            Add new component
+            <Plus size={10} />
+            Add component
           </button>
 
           {categories.map(category => (
-            <div key={category} className="mb-4">
+            <div key={category} className="mb-3">
               <button
-                onClick={() => setExpandedCategory(expandedCategory === category ? null : category)}
-                className="w-full flex items-center justify-between px-3 py-2 hover:bg-gray-200 rounded-lg transition-colors"
+                className="w-full flex items-center justify-between px-2 py-1 hover:bg-gray-200 rounded-md transition-colors"
               >
                 <span className="text-xs font-semibold text-gray-700 uppercase">{category}</span>
-                <ChevronRight
-                  size={16}
-                  className={clsx(
-                    'text-gray-500 transition-transform',
-                    expandedCategory === category && 'rotate-90'
-                  )}
-                />
               </button>
 
-              {expandedCategory === category && (
-                <div className="mt-1 ml-2 space-y-1">
-                  {componentsByCategory[category].map(comp => (
-                    <button
-                      key={comp.name}
-                      onClick={() => setSelectedComponent(comp.name)}
-                      className={clsx(
-                        'w-full text-left px-3 py-2 text-sm rounded-lg transition-colors',
-                        selectedComponent === comp.name
-                          ? 'bg-blue-100 text-blue-700 font-medium'
-                          : 'text-gray-700 hover:bg-gray-200'
-                      )}
-                    >
-                      {comp.name}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className="mt-1 ml-2 space-y-1">
+                {componentsByCategory[category].map(comp => (
+                  <button
+                    key={comp.name}
+                    onClick={() => setSelectedComponent(comp.name)}
+                    className={clsx(
+                      'w-full text-left px-2 py-1 text-xs rounded-md transition-colors',
+                      selectedComponent === comp.name
+                        ? 'bg-blue-100 text-blue-700 font-medium'
+                        : 'text-gray-700 hover:bg-gray-200'
+                    )}
+                  >
+                    {comp.name}
+                  </button>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -212,29 +202,29 @@ export default function ComponentsView() {
             />
           </div>
         ) : selected ? (
-          <div className="p-8 w-full max-w-4xl">
+          <div className="p-6 w-full max-w-4xl">
             {/* Component Title */}
-            <div className="mb-8">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">{selected.name}</h1>
-              <p className="text-lg text-gray-600">{selected.description}</p>
+            <div className="mb-6">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">{selected.name}</h1>
+              <p className="text-base text-gray-600">{selected.description}</p>
             </div>
 
             {/* Example Section */}
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Example</h2>
-              <div className="bg-gray-100 rounded-lg p-6 flex items-center justify-center min-h-32">
+            <div className="mb-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-3">Example</h2>
+              <div className="bg-gray-100 rounded-md p-4 flex items-center justify-center min-h-24">
                 <div className="text-center">
-                  <p className="text-gray-600 mb-3">Component preview would render here</p>
-                  <p className="text-sm text-gray-500">&lt;{selected.name} /&gt;</p>
+                  <p className="text-gray-600 mb-2">Component preview would render here</p>
+                  <p className="text-xs text-gray-500">&lt;{selected.name} /&gt;</p>
                 </div>
               </div>
             </div>
 
             {/* Usage Section */}
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Usage</h2>
-              <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
-                <pre className="text-sm text-gray-300 font-mono">
+            <div className="mb-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-3">Usage</h2>
+              <div className="bg-gray-900 rounded-md p-3 overflow-x-auto">
+                <pre className="text-xs text-gray-300 font-mono">
                   {`<${selected.name} />`}
                 </pre>
               </div>
@@ -242,35 +232,35 @@ export default function ComponentsView() {
 
             {/* Props Section */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Props</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-3">Props</h2>
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse">
                   <thead>
                     <tr className="border-b border-gray-300 bg-gray-50">
-                      <th className="text-left px-4 py-3 font-semibold text-gray-900 text-sm">Name</th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-900 text-sm">Type</th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-900 text-sm">Description</th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-900 text-sm">Default</th>
+                      <th className="text-left px-3 py-2 font-semibold text-gray-900 text-xs">Name</th>
+                      <th className="text-left px-3 py-2 font-semibold text-gray-900 text-xs">Type</th>
+                      <th className="text-left px-3 py-2 font-semibold text-gray-900 text-xs">Description</th>
+                      <th className="text-left px-3 py-2 font-semibold text-gray-900 text-xs">Default</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr className="border-b border-gray-200 hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm font-mono text-pink-600">variant</td>
-                      <td className="px-4 py-3 text-sm font-mono text-gray-600">string</td>
-                      <td className="px-4 py-3 text-sm text-gray-600">Component styling variant</td>
-                      <td className="px-4 py-3 text-sm text-gray-500">-</td>
+                      <td className="px-3 py-2 text-xs font-mono text-pink-600">variant</td>
+                      <td className="px-3 py-2 text-xs font-mono text-gray-600">string</td>
+                      <td className="px-3 py-2 text-xs text-gray-600">Component styling variant</td>
+                      <td className="px-3 py-2 text-xs text-gray-500">-</td>
                     </tr>
                     <tr className="border-b border-gray-200 hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm font-mono text-pink-600">size</td>
-                      <td className="px-4 py-3 text-sm font-mono text-gray-600">sm | md | lg</td>
-                      <td className="px-4 py-3 text-sm text-gray-600">Component size</td>
-                      <td className="px-4 py-3 text-sm text-gray-500">md</td>
+                      <td className="px-3 py-2 text-xs font-mono text-pink-600">size</td>
+                      <td className="px-3 py-2 text-xs font-mono text-gray-600">sm | md | lg</td>
+                      <td className="px-3 py-2 text-xs text-gray-600">Component size</td>
+                      <td className="px-3 py-2 text-xs text-gray-500">md</td>
                     </tr>
                     <tr className="border-b border-gray-200 hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm font-mono text-pink-600">disabled</td>
-                      <td className="px-4 py-3 text-sm font-mono text-gray-600">boolean</td>
-                      <td className="px-4 py-3 text-sm text-gray-600">Disable the component</td>
-                      <td className="px-4 py-3 text-sm text-gray-500">false</td>
+                      <td className="px-3 py-2 text-xs font-mono text-pink-600">disabled</td>
+                      <td className="px-3 py-2 text-xs font-mono text-gray-600">boolean</td>
+                      <td className="px-3 py-2 text-xs text-gray-600">Disable the component</td>
+                      <td className="px-3 py-2 text-xs text-gray-500">false</td>
                     </tr>
                   </tbody>
                 </table>

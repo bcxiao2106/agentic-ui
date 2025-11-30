@@ -1,9 +1,10 @@
 import { Router, Request, Response } from 'express';
+import type { Router as ExpressRouter } from 'express';
 import { logger } from '@/utils/logger';
 import { query, queryOne } from '@/database/connection';
 import { AppError } from '@/middleware/errorHandler';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 // List all tools
 router.get('/', async (req: Request, res: Response) => {

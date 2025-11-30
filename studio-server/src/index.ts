@@ -3,12 +3,14 @@ import cors from 'cors';
 import morgan from 'morgan';
 import 'express-async-errors';
 import path from 'path';
+import swaggerUi from 'swagger-ui-express';
 
 import { env, validateEnv } from '@/config/env';
 import { initializePool, closePool } from '@/database/connection';
 import { initializeDatabase, checkDatabase } from '@/database/init';
 import { logger } from '@/utils/logger';
 import { errorHandler } from '@/middleware/errorHandler';
+import { swaggerSpec } from '@/config/swagger.config';
 
 // Routes
 import apiRoutes from '@/routes';
@@ -44,6 +46,13 @@ async function startServer(): Promise<void> {
 
     // Logging
     app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'));
+
+    // Swagger API Documentation
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+      customCss: '.swagger-ui .topbar { display: none }',
+      customSiteTitle: 'Studio Server API Documentation',
+    }));
+    logger.info('📖 Swagger documentation available at /api-docs');
 
     // API Routes
     app.use('/api', apiRoutes);

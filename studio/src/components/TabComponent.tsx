@@ -26,31 +26,31 @@ const TabComponent: React.FC<TabComponentProps> = ({
 
   return (
     <div>
-      <div className="flex border-b">
+      <div className="flex border-b text-sm">
         <button
-          className={`px-4 py-2 ${activeTab === 'handler' ? 'border-b-2 border-blue-500' : ''}`}
+          className={`px-3 py-1 ${activeTab === 'handler' ? 'border-b-2 border-blue-500' : ''}`}
           onClick={() => setActiveTab('handler')}
         >
           Handler
         </button>
         <button
-          className={`px-4 py-2 ${activeTab === 'input' ? 'border-b-2 border-blue-500' : ''}`}
+          className={`px-3 py-1 ${activeTab === 'input' ? 'border-b-2 border-blue-500' : ''}`}
           onClick={() => setActiveTab('input')}
         >
           Input Schema
         </button>
         <button
-          className={`px-4 py-2 ${activeTab === 'output' ? 'border-b-2 border-blue-500' : ''}`}
+          className={`px-3 py-1 ${activeTab === 'output' ? 'border-b-2 border-blue-500' : ''}`}
           onClick={() => setActiveTab('output')}
         >
           Output Schema
         </button>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-3">
         {activeTab === 'handler' && (
           <Editor
-            height="200px"
+            height="300px"
             defaultLanguage="javascript"
             value={handlerSourceCode}
             onChange={(value) => onHandlerChange(value || '')}
@@ -59,7 +59,7 @@ const TabComponent: React.FC<TabComponentProps> = ({
         )}
         {activeTab === 'input' && (
           <Editor
-            height="200px"
+            height="300px"
             defaultLanguage="json"
             value={inputSchema}
             onChange={(value) => onInputSchemaChange(value || '')}
@@ -68,7 +68,7 @@ const TabComponent: React.FC<TabComponentProps> = ({
         )}
         {activeTab === 'output' && (
           <Editor
-            height="200px"
+            height="300px"
             defaultLanguage="json"
             value={outputSchema}
             onChange={(value) => onOutputSchemaChange(value || '')}

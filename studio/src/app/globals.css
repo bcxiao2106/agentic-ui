@@ -10,6 +10,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 14px; /* Base font size - affects all rem units */
 }
 
 body {
@@ -18,4 +19,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  line-height: 1.5;
 }

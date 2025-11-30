@@ -19,7 +19,8 @@ export const env = {
   logDir: process.env.LOG_DIR || './logs',
 
   // CORS
-  corsOrigin: (process.env.CORS_ORIGIN || 'http://localhost:3000,http://localhost:3001').split(','),
+  corsOrigin: ('http://localhost:3000,http://localhost:3001,https://yummy-cameras-grab.loca.lt').split(','),
+  // corsOrigin: (process.env.CORS_ORIGIN || 'http://localhost:3000,http://localhost:3001,https://yummy-cameras-grab.loca.lt').split(','),
 
   // MCP
   mcpEnabled: process.env.MCP_ENABLED === 'true',
