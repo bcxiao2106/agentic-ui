@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'ax
 // API Base URL - uses current origin in browser, or env variable, or defaults to localhost
 const API_BASE_URL =
   (typeof window !== 'undefined') && window.location.hostname !== 'localhost'
-    ? `https://warm-ducks-sit.loca.lt/`
+    ? `https://huge-boxes-clap.loca.lt/`
     : process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
 
 // Create axios instance with default config
